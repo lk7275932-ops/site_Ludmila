@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Людмила Кузнецова — Финансовый директор и консультант</title>
+    <meta name="description" content="Помогаю собственникам бизнеса навести порядок в бухгалтерском учёте, документах и цифрах, разобраться в финансовых результатах и выстроить систему контроля финансов.">
+    
+    <!-- Подключение шрифтов Google Fonts: Playfair Display и Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0C2141',
+                            hover: '#15325E',
+                            dark: '#071429',
+                            light: '#F0F4F9',
+                            border: '#E2E8F0'
+                        },
+                        royal: {
+                            DEFAULT: '#1E5BB8',
+                            light: '#EBF2FC'
+                        },
+                        slate: {
+                            body: '#4A5568',
+                            muted: '#64748B'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'cta': '0 10px 22px -6px rgba(12, 33, 65, 0.22)',
+                        'cta-hover': '0 14px 28px -6px rgba(12, 33, 65, 0.30)',
+                        'photo': '0 24px 48px -12px rgba(12, 33, 65, 0.09)',
+                        'header-scroll': '0 4px 20px -2px rgba(12, 33, 65, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .lk-tilda-wrapper {
+            font-family: 'Inter', sans-serif;
+            color: #4A5568;
+            background-color: #FFFFFF;
+            overflow-x: clip;
+            position: relative;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .lk-transition {
+            transition: all 200ms ease-out;
+        }
+
+        /* Мягкая декоративная форма строго за фотографией первого экрана */
+        .hero-bg-soft-shape {
+            position: absolute;
+            top: 50%;
+            right: 0%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 620px;
+            height: 90%;
+            max-height: 750px;
+            background: linear-gradient(135deg, #F4F7FB 0%, #EBF1F8 100%);
+            border-radius: 44% 56% 48% 52% / 46% 48% 52% 54%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-bg-soft-shape {
+                display: none;
+            }
+        }
+
+        /* Карусель второго экрана */
+        .lk-carousel-viewport {
+            overflow: hidden;
+            position: relative;
+            cursor: grab;
+            user-select: none;
+        }
+        .lk-carousel-viewport:active {
+            cursor: grabbing;
+        }
+        .lk-carousel-track {
+            display: flex;
+            transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="bg-white m-0 p-0">
+
+<div class="lk-tilda-wrapper pt-[72px] sm:pt-[78px]">
+
+    <!-- ================= ШАПКА САЙТА (ЛИПКАЯ ЛЕНТА) ================= -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 lk-transition">
+        <div class="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10 h-[72px] sm:h-[78px] flex items-center justify-between">
+            <!-- Логотип -->
+            <a href="#" class="font-serif text-[23px] sm:text-[26px] font-semibold text-navy tracking-tight hover:opacity-80 lk-transition">
+                Людмила Кузнецова
+            </a>
+
+            <!-- Десктопное меню (Услуги сначала, затем Обо мне) -->
+            <nav class="hidden md:flex items-center space-x-9 lg:space-x-12">
+                <a href="#" class="text-[15px] sm:text-[16px] font-medium text-navy/85 hover:text-royal lk-transition">Главная</a>
+                <a href="#services" class="text-[15px] sm:text-[16px] font-medium text-navy/85 hover:text-royal lk-transition">Услуги</a>
+                <a href="#about" class="text-[15px] sm:text-[16px] font-medium text-navy/85 hover:text-royal lk-transition">Обо мне</a>
+            </nav>
+
+            <!-- Кнопка мобильного меню -->
+            <button id="mobileMenuBtn" aria-label="Открыть меню" class="md:hidden p-2 rounded-lg text-navy hover:bg-navy-light lk-transition">
+                <svg id="menuIconOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg id="menuIconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Выпадающее мобильное меню -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 shadow-lg">
+            <a href="#" class="mobile-link block text-base font-medium text-navy hover:text-royal py-1">Главная</a>
+            <a href="#services" class="mobile-link block text-base font-medium text-navy hover:text-royal py-1">Услуги</a>
+            <a href="#about" class="mobile-link block text-base font-medium text-navy hover:text-royal py-1">Обо мне</a>
+            <div class="pt-2">
+                <a href="https://t.me/Liudmila_1409" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full h-[52px] bg-navy text-white font-medium text-sm px-5 rounded-[11px] shadow-sm">
+                    Связаться в Telegram
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= ПЕРВЫЙ ЭКРАН (HERO SECTION) ================= -->
+    <section class="relative overflow-hidden py-12 sm:py-16 lg:py-20 bg-white flex items-center min-h-[calc(100vh-78px)]">
+        
+        <!-- Мягкая фоновая форма за фото -->
+        <div class="hero-bg-soft-shape"></div>
+
+        <div class="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-10 w-full relative z-10">
+            <!-- Двухколоночная сетка точь-в-точь по гармоничному референсу -->
+            <div class="grid grid-cols-1 lg:grid-cols-[54fr_46fr] gap-8 lg:gap-12 items-center">
+                
+                <!-- ЛЕВАЯ КОЛОНКА (Текст, оффер, кнопка и 3 триггера внизу) -->
+                <div class="order-1">
+                    
+                    <!-- Надзаголовок -->
+                    <div class="inline-flex items-center gap-3.5 mb-3">
+                        <span class="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.18em] text-royal">
+                            ФИНАНСОВЫЙ КОНСАЛТИНГ
+                        </span>
+                        <span class="w-12 sm:w-14 h-[1.5px] bg-[#8DA4C4]"></span>
+                    </div>
+
+                    <div class="text-[15px] sm:text-[16px] text-slate-body font-normal mb-4">
+                        Финансовый директор <span class="text-slate-300 mx-1">|</span> Эксперт по учёту и финансовому анализу
+                    </div>
+
+                    <!-- Главный заголовок H1 -->
+                    <h1 class="font-serif text-[34px] sm:text-[44px] lg:text-[50px] xl:text-[54px] font-semibold text-navy leading-[1.13] tracking-tight mb-5 max-w-[650px]">
+                        Превращаю финансовый хаос в понятную систему
+                    </h1>
+
+                    <!-- Описание -->
+                    <p class="text-[17px] sm:text-[18px] xl:text-[19px] text-slate-body font-normal leading-[1.58] max-w-[610px] mb-7">
+                        Помогаю собственникам бизнеса навести порядок в учёте, разобраться в финансовых результатах и выстроить прозрачную систему контроля финансов.
+                    </p>
+
+                    <!-- Кнопка Telegram -->
+                    <div class="mb-9 sm:mb-11">
+                        <a href="https://t.me/Liudmila_1409" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center justify-between bg-navy hover:bg-navy-hover text-white font-semibold text-[15px] sm:text-[16px] px-7 h-[56px] rounded-[12px] shadow-cta hover:shadow-cta-hover lk-transition hover:-translate-y-0.5 min-w-[275px] sm:min-w-[295px]">
+                            <span class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-white shrink-0 lk-transition group-hover:-rotate-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M21.944 2.506a1.5 1.5 0 0 0-1.577-.206L2.46 10.222a1.5 1.5 0 0 0 .112 2.787l4.655 1.552 1.825 5.476a1.5 1.5 0 0 0 2.529.546l2.752-2.981 4.544 3.324a1.5 1.5 0 0 0 2.356-.906l2.495-15.966a1.5 1.5 0 0 0-.784-1.548zm-3.835 3.635-7.977 7.18a.75.75 0 0 0-.227.386l-.83 3.318-1.158-3.474 10.192-7.41z"/>
+                                </svg>
+                                <span>Связаться в Telegram</span>
+                            </span>
+                            <svg class="w-5 h-5 text-white/90 ml-4 lk-transition group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m-6-6 6 6-6 6"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- 3 ТРИГГЕРА ВНИЗУ ПЕРВОГО ЭКРАНА -->
+                    <div class="grid grid-cols-1 sm:grid-cols-[auto_1px_auto_1px_auto] items-start gap-6 sm:gap-8 max-w-[620px]">
+                        
+                        <!-- Триггер 1 -->
+                        <div class="flex flex-col items-start">
+                            <div class="w-[52px] h-[52px] rounded-full bg-[#EEF3FA] flex items-center justify-center text-navy mb-3.5">
+                                <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 19v-4m4 4v-7m4 7v-9m4 9V6"/>
+                                </svg>
+                            </div>
+                            <div class="text-[16px] sm:text-[17px] leading-[1.32] text-navy">
+                                <span class="font-bold block">20+ лет</span>
+                                <span class="font-normal">опыта</span>
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block w-[1px] h-[68px] bg-slate-200/90 self-center"></div>
+
+                        <!-- Триггер 2 -->
+                        <div class="flex flex-col items-start">
+                            <div class="w-[52px] h-[52px] rounded-full bg-[#EEF3FA] flex items-center justify-center text-navy mb-3.5">
+                                <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M14 3v5h5"/>
+                                    <line stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" x1="9" y1="13" x2="15" y2="13"/>
+                                    <line stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" x1="9" y1="16.5" x2="15" y2="16.5"/>
+                                </svg>
+                            </div>
+                            <div class="text-[16px] sm:text-[17px] leading-[1.32] text-navy font-normal">
+                                Порядок в<br>бухгалтерии
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block w-[1px] h-[68px] bg-slate-200/90 self-center"></div>
+
+                        <!-- Триггер 3 -->
+                        <div class="flex flex-col items-start">
+                            <div class="w-[52px] h-[52px] rounded-full bg-[#EEF3FA] flex items-center justify-center text-navy mb-3.5">
+                                <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M21 11A8.5 8.5 0 0 0 12.5 2.5V11H21z"/>
+                                </svg>
+                            </div>
+                            <div class="text-[16px] sm:text-[17px] leading-[1.32] text-navy font-normal">
+                                Финансовый анализ<br>и систематизация
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ПРАВАЯ КОЛОНКА (Портрет эксперта) -->
+                <div class="order-2 flex justify-center lg:justify-end items-center">
+                    <div class="relative w-full max-w-[400px] sm:max-w-[460px] lg:max-w-[500px]">
+                        <div class="relative rounded-[24px] overflow-hidden shadow-photo ring-1 ring-navy/5 bg-[#16243A]">
+                            <img 
+                                id="expertMainPhoto"
+                                src="https://i.yapx.ru/eSkI3.png" 
+                                alt="Людмила Кузнецова — Финансовый директор и консультант" 
+                                class="w-full h-auto block object-contain lk-transition"
+                                onerror="this.src='https://placehold.co/800x960/0C2141/FFFFFF?text=Фото'"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ВТОРОЙ ЭКРАН: ИНТЕРАКТИВНАЯ КАРУСЕЛЬ УСЛУГ ================= -->
+    <section id="services" class="py-16 sm:py-20 lg:py-24 bg-[#F8FAFC] border-t border-slate-200/80 relative overflow-hidden">
+        <div class="max-w-[1120px] mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
+            
+            <!-- Шапка второго экрана -->
+            <div class="max-w-[820px] mx-auto text-center mb-9 sm:mb-12">
+                <div class="inline-flex items-center justify-center gap-3.5 mb-3.5">
+                    <span class="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-royal">
+                        С КАКИМИ ЗАДАЧАМИ Я ПОМОГАЮ
+                    </span>
+                    <span class="w-12 sm:w-16 h-[1.5px] bg-[#6482A6]"></span>
+                </div>
+                <h2 class="font-serif text-[32px] sm:text-[44px] lg:text-[50px] font-semibold text-navy leading-[1.14] tracking-tight mb-4">
+                    Проблема — решение — результат
+                </h2>
+                <p class="text-[17px] sm:text-[19px] text-slate-body font-normal leading-[1.55] max-w-[650px] mx-auto">
+                    Пролистайте карточки и посмотрите, какие задачи бизнеса можно решить с моей помощью.
+                </p>
+            </div>
+
+            <!-- Контейнер карусели -->
+            <div class="bg-white rounded-[26px] sm:rounded-[30px] border border-slate-200/90 shadow-photo p-4 sm:p-6 lg:p-8 relative">
+                
+                <div class="flex items-center justify-between gap-4 px-1 sm:px-2 mb-4 sm:mb-5">
+                    <span class="text-[14px] sm:text-[15px] font-medium text-slate-muted">
+                        Направления работы и задачи бизнеса
+                    </span>
+                    <div class="text-[15px] sm:text-[16px] font-semibold text-slate-muted tabular-nums">
+                        <span id="carouselCurrentIndex" class="text-navy">1</span> / 6
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <!-- Боковые стрелки для десктопа -->
+                    <button id="carouselSidePrev" type="button" aria-label="Назад" class="hidden lg:flex items-center justify-center w-11 h-11 rounded-full bg-white border border-slate-200 text-navy shadow-md hover:bg-navy hover:text-white hover:border-navy lk-transition absolute -left-5 top-1/2 -translate-y-1/2 z-20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button id="carouselSideNext" type="button" aria-label="Вперед" class="hidden lg:flex items-center justify-center w-11 h-11 rounded-full bg-white border border-slate-200 text-navy shadow-md hover:bg-navy hover:text-white hover:border-navy lk-transition absolute -right-5 top-1/2 -translate-y-1/2 z-20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <div id="carouselViewport" class="lk-carousel-viewport rounded-[20px] sm:rounded-[24px]">
+                        <div id="carouselTrack" class="lk-carousel-track items-stretch">
+
+                            <!-- Слайд 1 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">БУХГАЛТЕРСКИЙ УЧЁТ</span>
+                                            <svg class="w-8 h-8 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13" stroke-width="1.6"/><line x1="8" y1="17" x2="13" y2="17" stroke-width="1.6"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">В документах и учёте беспорядок?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Не хватает документов, есть расхождения, данные в учётной системе не вызывают доверия.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Помогу выявить ошибки, систематизировать документы и привести учёт в порядок.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Порядок в учёте и документах</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- Слайд 2 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">ТРЕБОВАНИЯ И ЗАПРОСЫ НАЛОГОВОЙ</span>
+                                            <svg class="w-9 h-9 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 28 28"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h7"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 3v5h5"/><line x1="8" y1="11" x2="14" y2="11" stroke-width="1.6"/><circle cx="20" cy="20" r="5.5" stroke="currentColor" stroke-width="1.6"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">Пришёл запрос или требование из налоговой?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Запросы и требования ИФНС вызывают стресс, а ошибка в ответе может привести к рискам.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Помогу подготовить пояснения, собрать документы и корректно отработать запрос.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Спокойная и корректная отработка запроса</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- Слайд 3 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">115-ФЗ И БАНКОВСКИЕ ЗАПРОСЫ</span>
+                                            <svg class="w-8 h-8 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 10h18M4 10l8-6 8 6M5 10v8m4-8v8m6-8v8m4-8v8M3 18h18"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">Банк запросил документы и пояснения?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Банк запрашивает документы по операциям, а сроки ограничены и важно ответить корректно.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Помогу собрать пакет документов и подготовить понятные пояснения по 115-ФЗ.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Быстрая отработка запроса и снижение риска</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- Слайд 4 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">ВНЕШНЕЭКОНОМИЧЕСКАЯ ДЕЯТЕЛЬНОСТЬ</span>
+                                            <svg class="w-8 h-8 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 0 0 0 18"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">Сложности с учётом и расчётами по ВЭД?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Поставки из ЕАЭС, валютные платежи, расчёты через агентов и требования контроля.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Консультирую по учёту ВЭД, оформлению операций, расчётам и валютному контролю.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Порядок в документах, учёте и расчётах по ВЭД</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- Слайд 5 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">ФИНАНСОВАЯ СИСТЕМА</span>
+                                            <svg class="w-8 h-8 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" stroke-width="1.6"/><line x1="3" y1="9.5" x2="21" y2="9.5" stroke-width="1.6"/><line x1="12" y1="9.5" x2="12" y2="20" stroke-width="1.6"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">Хотите принимать решения на основе цифр?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Данные собираются вручную, отчёты запаздывают, нет единой системы показателей.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Помогу выстроить систему управленческой отчётности для решений собственника.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Информация для управления бизнесом</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <!-- Слайд 6 -->
+                            <div class="lk-carousel-slide w-full shrink-0 px-0.5">
+                                <article class="h-full bg-[#0B1E36] text-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 lg:p-8 flex flex-col justify-between min-h-[380px]">
+                                    <div>
+                                        <div class="flex items-start justify-between gap-4 mb-4">
+                                            <span class="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[#9BB0C9] pt-1">КОНТРОЛЬ ФИНАНСОВ</span>
+                                            <svg class="w-8 h-8 text-white/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke-width="1.6"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 10h18M9 14h6"/></svg>
+                                        </div>
+                                        <h3 class="text-[24px] sm:text-[28px] lg:text-[30px] font-bold text-white leading-[1.18] tracking-tight mb-4">Не хватает контроля денежных потоков?</h3>
+                                        <div class="mb-4">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">СИТУАЦИЯ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Сложно планировать платежи и заранее оценивать потребность в деньгах.</p>
+                                        </div>
+                                        <div class="mb-5">
+                                            <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#9BB0C9] mb-1">КАК Я ПОМОГАЮ</div>
+                                            <p class="text-[15px] sm:text-[16px] text-white/95 leading-snug">Помогу наладить платёжное планирование и инструменты контроля потоков.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-[#233B59]/90 border border-white/10 rounded-[16px] p-4 sm:p-5 mt-2">
+                                        <div class="text-[12px] sm:text-[13px] text-[#B0C4DE] mb-1">Ожидаемый результат работы</div>
+                                        <div class="text-[17px] sm:text-[19px] font-bold text-white leading-tight">Более предсказуемые платежи</div>
+                                    </div>
+                                </article>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Панель пагинации карусели -->
+                <div class="flex items-center justify-between gap-4 mt-5 sm:mt-6 px-1 sm:px-2">
+                    <div id="carouselDots" class="flex items-center gap-2.5 sm:gap-3">
+                        <button type="button" data-slide="0" aria-label="1" class="carousel-dot w-3 h-3 rounded-full bg-navy lk-transition"></button>
+                        <button type="button" data-slide="1" aria-label="2" class="carousel-dot w-3 h-3 rounded-full bg-slate-200 hover:bg-slate-300 lk-transition"></button>
+                        <button type="button" data-slide="2" aria-label="3" class="carousel-dot w-3 h-3 rounded-full bg-slate-200 hover:bg-slate-300 lk-transition"></button>
+                        <button type="button" data-slide="3" aria-label="4" class="carousel-dot w-3 h-3 rounded-full bg-slate-200 hover:bg-slate-300 lk-transition"></button>
+                        <button type="button" data-slide="4" aria-label="5" class="carousel-dot w-3 h-3 rounded-full bg-slate-200 hover:bg-slate-300 lk-transition"></button>
+                        <button type="button" data-slide="5" aria-label="6" class="carousel-dot w-3 h-3 rounded-full bg-slate-200 hover:bg-slate-300 lk-transition"></button>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <button id="carouselPrevBtn" type="button" aria-label="Назад" class="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-white border border-slate-200 text-navy hover:bg-navy-light flex items-center justify-center lk-transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button id="carouselNextBtn" type="button" aria-label="Вперед" class="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#0B1E36] hover:bg-navy-hover text-white flex items-center justify-center shadow-sm lk-transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Нижний CTA карусели -->
+            <div class="mt-10 sm:mt-12 flex flex-col items-center text-center px-2">
+                <p class="font-serif text-[22px] sm:text-[26px] lg:text-[28px] font-medium text-navy tracking-tight mb-5">
+                    Узнали свою ситуацию? Обсудим, с чего начать.
+                </p>
+                <a href="https://t.me/Liudmila_1409" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center justify-between bg-navy hover:bg-navy-hover text-white font-semibold text-[15px] sm:text-[16px] px-7 h-[56px] rounded-[12px] shadow-cta hover:shadow-cta-hover lk-transition hover:-translate-y-0.5 min-w-[275px] sm:min-w-[295px]">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0 lk-transition group-hover:-rotate-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.944 2.506a1.5 1.5 0 0 0-1.577-.206L2.46 10.222a1.5 1.5 0 0 0 .112 2.787l4.655 1.552 1.825 5.476a1.5 1.5 0 0 0 2.529.546l2.752-2.981 4.544 3.324a1.5 1.5 0 0 0 2.356-.906l2.495-15.966a1.5 1.5 0 0 0-.784-1.548zm-3.835 3.635-7.977 7.18a.75.75 0 0 0-.227.386l-.83 3.318-1.158-3.474 10.192-7.41z"/>
+                        </svg>
+                        <span>Связаться в Telegram</span>
+                    </span>
+                    <svg class="w-5 h-5 text-white/90 ml-4 lk-transition group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m-6-6 6 6-6 6"/>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= ТРЕТИЙ ЭКРАН: ОБО МНЕ И МОЕЙ КВАЛИФИКАЦИИ ================= -->
+    <section id="about" class="py-8 sm:py-10 bg-white border-t border-slate-200/80 relative overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
+            
+            <!-- Шапка третьего экрана -->
+            <div class="max-w-[850px] mb-6 sm:mb-8">
+                <div class="inline-flex items-center gap-3.5 mb-3.5">
+                    <span class="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-royal">
+                        ОБО МНЕ И МОЕЙ КВАЛИФИКАЦИИ
+                    </span>
+                    <span class="w-12 sm:w-16 h-[1.5px] bg-[#6482A6]"></span>
+                </div>
+                <h2 class="font-serif text-[32px] sm:text-[44px] lg:text-[48px] font-semibold text-navy leading-[1.15] tracking-tight mb-4">
+                    За профессиональными решениями стоят знания и практика
+                </h2>
+                <p class="text-[17px] sm:text-[18px] text-slate-body font-normal leading-[1.5] max-w-[800px]">
+                    Я объединяю фундаментальное финансовое образование, международные стандарты отчётности и практический опыт работы в разных юрисдикциях.
+                </p>
+            </div>
+
+            <!-- Двухколоночный макет третьего экрана -->
+            <div class="grid grid-cols-1 lg:grid-cols-[400px_minmax(0,1fr)] xl:grid-cols-[440px_minmax(0,1fr)] gap-6 lg:gap-8 items-stretch">
+                
+                <!-- ЛЕВАЯ КОЛОНКА: Вертикальное видео Кinescope -->
+                <div class="order-1 flex flex-col items-center lg:items-start">
+                    <div class="w-full max-w-[400px] bg-[#0B1E36] rounded-[24px] overflow-hidden shadow-photo ring-1 ring-navy/5 p-3 sm:p-4">
+                        <div class="relative w-full rounded-[16px] overflow-hidden bg-black/40">
+                            <!-- Кастомный постер-обложка (красивое фото с улыбкой до старта видео) -->
+                            <div id="videoPoster" class="absolute inset-0 z-10 cursor-pointer group flex flex-col justify-end bg-navy-dark">
+                                <img src="https://i.yapx.ru/eS2T8.png" alt="Людмила Кузнецова — Давайте знакомиться" class="w-full h-full object-cover absolute inset-0 transition duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/75 via-transparent to-transparent"></div>
+                                <div class="relative z-20 p-6 flex flex-col items-center justify-center text-center">
+                                    <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-3 shadow-lg group-hover:bg-white/30 lk-transition group-hover:scale-110">
+                                        <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                    <span class="text-[15px] font-semibold text-white tracking-wide">Давайте знакомиться</span>
+                                </div>
+                            </div>
+                            <!-- Фрейм видео Кinescope (с нулевой миллисекунды) -->
+                            <div style="position: relative; padding-top: 177.78%; width: 100%">
+                                <iframe id="kinescopeIframe" src="" data-src="https://kinescope.io/embed/7tvh6m4tchQc4QxTrwaYfJ?autoplay=1&time=0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ПРАВАЯ КОЛОНКА: Карточки образования + Международная практика под ними -->
+                <div class="order-2 flex flex-col justify-center h-full gap-4 lg:gap-5">
+                    
+                    <!-- Карточка 1: РЭУ им. Г. В. Плеханова -->
+                    <div class="bg-white rounded-[16px] p-5 lg:p-6 border border-slate-200/90 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#EEF3FA] flex items-center justify-center text-navy shrink-0 mt-0.5">
+                            <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-[17px] sm:text-[19px] font-bold text-navy mb-0.5">РЭУ им. Г. В. Плеханова</h3>
+                            <p class="text-[14px] text-slate-body mb-1.5">Финансы и кредит</p>
+                            <span class="inline-block text-[12px] sm:text-[13px] font-semibold text-royal bg-royal-light px-2.5 py-0.5 rounded-full">Диплом с отличием</span>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2: ACCA DipIFR (Rus) -->
+                    <div class="bg-white rounded-[16px] p-5 lg:p-6 border border-slate-200/90 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#EEF3FA] flex items-center justify-center text-navy shrink-0 mt-0.5">
+                            <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-[17px] sm:text-[19px] font-bold text-navy mb-0.5">ACCA DipIFR (Rus)</h3>
+                            <p class="text-[14px] text-slate-body">Диплом по международной финансовой отчётности</p>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3: ИПБ России -->
+                    <div class="bg-white rounded-[16px] p-5 lg:p-6 border border-slate-200/90 shadow-sm flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#EEF3FA] flex items-center justify-center text-navy shrink-0 mt-0.5">
+                            <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-[17px] sm:text-[19px] font-bold text-navy mb-0.5">ИПБ России</h3>
+                            <p class="text-[14px] text-slate-body">Действующий член профессионального объединения с 2004 года</p>
+                        </div>
+                    </div>
+
+                    <!-- Блок Международной практики справа под образованием -->
+                    <div class="bg-slate-50/50 rounded-[16px] p-5 lg:p-6 border border-slate-200/80 shadow-sm">
+                        <div class="flex items-center gap-2 mb-3.5">
+                            <svg class="w-5 h-5 text-navy shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9" stroke-width="1.8"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 0 0 0 18"/>
+                            </svg>
+                            <h3 class="text-[17px] sm:text-[18px] font-bold text-navy">Международная практика</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2.5">
+                            <div class="bg-white rounded-[12px] py-2 px-3 text-center font-semibold text-navy shadow-sm border border-slate-200 text-[14px]">
+                                Россия
+                            </div>
+                            <div class="bg-white rounded-[12px] py-2 px-3 text-center font-semibold text-navy shadow-sm border border-slate-200 text-[14px]">
+                                Казахстан
+                            </div>
+                            <div class="bg-white rounded-[12px] py-2 px-3 text-center font-semibold text-navy shadow-sm border border-slate-200 text-[14px]">
+                                ОАЭ
+                            </div>
+                        </div>
+                        <p class="text-[13px] sm:text-[14px] text-slate-body">
+                            Бухгалтерский и финансовый учёт, международные операции, ВЭД и валютный контроль.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Нижняя плашка CTA -->
+            <div class="mt-6">
+                <a href="https://t.me/Liudmila_1409" target="_blank" rel="noopener noreferrer" class="group flex flex-col sm:flex-row items-center justify-between bg-navy hover:bg-navy-hover text-white rounded-[12px] px-6 py-4 lg:px-8 shadow-sm hover:shadow-md lk-transition">
+                    <div class="text-[18px] sm:text-[20px] font-serif font-semibold text-white mb-2 sm:mb-0">
+                        Обсудим вашу задачу?
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[14px] sm:text-[15px] text-[#A6BDDC] font-normal group-hover:text-white lk-transition">Связаться в Telegram</span>
+                        <svg class="w-4 h-4 text-[#A6BDDC] group-hover:text-white lk-transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // Мобильное меню
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !isHidden);
+            menuIconOpen.classList.toggle('hidden', isHidden);
+            menuIconClose.classList.toggle('hidden', !isHidden);
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
+        });
+    }
+
+    // Тень липкой шапки при скролле
+    const siteHeader = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+        if (!siteHeader) return;
+        if (window.scrollY > 12) {
+            siteHeader.classList.add('shadow-header-scroll');
+        } else {
+            siteHeader.classList.remove('shadow-header-scroll');
+        }
+    });
+
+    // Интерактив видеопостера (старт видео с нулевой миллисекунды)
+    const videoPoster = document.getElementById('videoPoster');
+    const kinescopeIframe = document.getElementById('kinescopeIframe');
+    if (videoPoster && kinescopeIframe) {
+        videoPoster.addEventListener('click', () => {
+            kinescopeIframe.src = kinescopeIframe.getAttribute('data-src');
+            videoPoster.style.display = 'none';
+        });
+    }
+
+    // Карусель второго экрана
+    (function initServicesCarousel() {
+        const track = document.getElementById('carouselTrack');
+        const viewport = document.getElementById('carouselViewport');
+        const prevBtn = document.getElementById('carouselPrevBtn');
+        const nextBtn = document.getElementById('carouselNextBtn');
+        const sidePrevBtn = document.getElementById('carouselSidePrev');
+        const sideNextBtn = document.getElementById('carouselSideNext');
+        const currentIndexEl = document.getElementById('carouselCurrentIndex');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        if (!track || !viewport) return;
+
+        const totalSlides = 6;
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            if (currentIndexEl) currentIndexEl.textContent = String(currentIndex + 1);
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('bg-navy', idx === currentIndex);
+                dot.classList.toggle('bg-slate-200', idx !== currentIndex);
+                dot.classList.toggle('hover:bg-slate-300', idx !== currentIndex);
+            });
+        }
+
+        function goNext() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function goPrev() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        if (nextBtn) nextBtn.addEventListener('click', goNext);
+        if (prevBtn) prevBtn.addEventListener('click', goPrev);
+        if (sideNextBtn) sideNextBtn.addEventListener('click', goNext);
+        if (sidePrevBtn) sidePrevBtn.addEventListener('click', goPrev);
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = parseInt(dot.getAttribute('data-slide'), 10);
+                if (!isNaN(idx)) {
+                    currentIndex = idx;
+                    updateCarousel();
+                }
+            });
+        });
+
+        // Свайпы и перетаскивание
+        let startX = 0;
+        let isDragging = false;
+        viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+        viewport.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 45) { diff > 0 ? goNext() : goPrev(); }
+            isDragging = false;
+        });
+        viewport.addEventListener('mousedown', (e) => { startX = e.clientX; isDragging = true; });
+        window.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            const diff = startX - e.clientX;
+            if (Math.abs(diff) > 55) { diff > 0 ? goNext() : goPrev(); }
+            isDragging = false;
+        });
+
+        updateCarousel();
+    })();
+</script>
+<!-- ==========================================================================
+     КОНЕЦ КОДА ДЛЯ ВСТАВКИ В ТИЛЬДУ
+     ========================================================================== -->
+
+</body>
+</html>
